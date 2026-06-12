@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@300;400;700&family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600;700&family=Oswald:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+/* Common styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0A0A0A;
+  color: #FFFFFF;
+}
+
+/* Custom transitions and scroll behaviors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Category Fonts Helper Classes */
+.font-sora { font-family: 'Sora', sans-serif; }
+.font-inter { font-family: 'Inter', sans-serif; }
+
+/* Restaurant: Playfair Display + Inter */
+.restaurant-theme {
+  font-family: 'Inter', sans-serif;
+}
+.restaurant-theme h1, 
+.restaurant-theme h2, 
+.restaurant-theme h3, 
+.restaurant-theme .heading {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Hotel: Cormorant Garamond + Lato */
+.hotel-theme {
+  font-family: 'Lato', sans-serif;
+}
+.hotel-theme h1, 
+.hotel-theme h2, 
+.hotel-theme h3, 
+.hotel-theme .heading {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Salon: Libre Baskerville + Nunito */
+.salon-theme {
+  font-family: 'Nunito', sans-serif;
+}
+.salon-theme h1, 
+.salon-theme h2, 
+.salon-theme h3, 
+.salon-theme .heading {
+  font-family: 'Libre Baskerville', serif;
+}
+
+/* Clinic: Source Serif Pro + Open Sans */
+.clinic-theme {
+  font-family: 'Open Sans', sans-serif;
+}
+.clinic-theme h1, 
+.clinic-theme h2, 
+.clinic-theme h3, 
+.clinic-theme .heading {
+  font-family: 'Playfair Display', serif; /* Use Playfair or similar serif for clean medical look */
+}
+
+/* Real Estate: Raleway + Roboto */
+.real-estate-theme {
+  font-family: 'Roboto', sans-serif;
+}
+.real-estate-theme h1, 
+.real-estate-theme h2, 
+.real-estate-theme h3, 
+.real-estate-theme .heading {
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Gym: Oswald + Roboto */
+.gym-theme {
+  font-family: 'Roboto', sans-serif;
+}
+.gym-theme h1, 
+.gym-theme h2, 
+.gym-theme h3, 
+.gym-theme .heading {
+  font-family: 'Oswald', sans-serif;
+}
+
+/* School: Merriweather + Poppins */
+.school-theme {
+  font-family: 'Poppins', sans-serif;
+}
+.school-theme h1, 
+.school-theme h2, 
+.school-theme h3, 
+.school-theme .heading {
+  font-family: 'Merriweather', serif;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse glow effect */
+@keyframes glow {
+  0%, 100% { opacity: 0.8; box-shadow: 0 0 10px rgba(245, 166, 35, 0.5); }
+  50% { opacity: 1; box-shadow: 0 0 20px rgba(245, 166, 35, 0.8); }
+}
+.animate-glow {
+  animation: glow 2s infinite;
+}
+
+/* Infinite continuous auto scroll marquee */
+@keyframes scrollLeftContinuous {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll {
+  display: flex;
+  width: max-content;
+  animation: scrollLeftContinuous 30s linear infinite;
+}
+.animate-scroll:hover {
+  animation-play-state: paused;
+}

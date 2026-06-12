@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "Information about a custom generated business website lead",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the lead"
+        },
+        "slug": {
+          "type": "string",
+          "description": "The URL slug identifier for this lead's demo page"
+        },
+        "business_name": {
+          "type": "string",
+          "description": "The company name of the business"
+        },
+        "category": {
+          "type": "string",
+          "description": "The industry category (e.g. Restaurant, Hotel, Salon, etc.)"
+        },
+        "owner_name": {
+          "type": "string",
+          "description": "The primary owner or contact name"
+        },
+        "address": {
+          "type": "string",
+          "description": "The physical address of the business"
+        },
+        "phone": {
+          "type": "string",
+          "description": "The primary contact voice/SMS phone number"
+        },
+        "whatsapp": {
+          "type": "string",
+          "description": "The WhatsApp dynamic target number"
+        },
+        "city": {
+          "type": "string",
+          "description": "The localized target city"
+        },
+        "tagline": {
+          "type": "string",
+          "description": "The customized branding tagline"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "ISO timestamp representing creation date"
+        },
+        "viewed": {
+          "type": "boolean",
+          "description": "Whether this lead has been viewed from admin"
+        },
+        "viewed_at": {
+          "type": "string",
+          "description": "ISO timestamp when the lead was first viewed"
+        },
+        "time_on_page": {
+          "type": "number",
+          "description": "Total seconds spent interacting with the preview"
+        },
+        "converted": {
+          "type": "boolean",
+          "description": "Whether the user clicked dynamic CTAs or was manually converted"
+        },
+        "converted_at": {
+          "type": "string",
+          "description": "ISO timestamp when conversion happened"
+        },
+        "whatsapp_pinged": {
+          "type": "boolean",
+          "description": "Whether the CallMeBot API was notified"
+        },
+        "generated_demo": {
+          "type": "boolean",
+          "description": "Whether the demo showcase was built"
+        },
+        "viewed_demo": {
+          "type": "boolean",
+          "description": "Whether the lead visited their live demo page"
+        },
+        "clicked_whatsapp": {
+          "type": "boolean",
+          "description": "Whether the lead clicked the live WhatsApp dynamic link"
+        },
+        "viewed_pricing": {
+          "type": "boolean",
+          "description": "Whether the lead visited the custom pricing dialog"
+        }
+      },
+      "required": [
+        "id",
+        "slug",
+        "business_name",
+        "category",
+        "owner_name",
+        "address",
+        "phone",
+        "whatsapp",
+        "city",
+        "created_at",
+        "viewed",
+        "time_on_page",
+        "converted"
+      ]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Leads directory for InstaDemoX website builder"
+    }
+  }
+}

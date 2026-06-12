@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net Catch-All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && 
+             request.auth.token.email == 'progvisionsite@gmail.com' && 
+             request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation Blueprint for the Lead entity
+    function isValidLead(data) {
+      return data.id is string && data.id.size() <= 128 &&
+             data.slug is string && data.slug.size() <= 200 &&
+             data.business_name is string && data.business_name.size() <= 200 &&
+             data.category is string && data.category.size() <= 100 &&
+             data.owner_name is string && data.owner_name.size() <= 150 &&
+             data.address is string && data.address.size() <= 500 &&
+             data.phone is string && data.phone.size() <= 30 &&
+             data.whatsapp is string && data.whatsapp.size() <= 30 &&
+             data.city is string && data.city.size() <= 100 &&
+             data.created_at is string && data.created_at.size() <= 50 &&
+             data.viewed is bool &&
+             (data.time_on_page is int || data.time_on_page is float) &&
+             data.converted is bool &&
+             (!('tagline' in data) || (data.tagline is string && data.tagline.size() <= 1000)) &&
+             (!('viewed_at' in data) || (data.viewed_at is string || data.viewed_at == null)) &&
+             (!('converted_at' in data) || (data.converted_at is string || data.converted_at == null)) &&
+             (!('whatsapp_pinged' in data) || (data.whatsapp_pinged is bool)) &&
+             (!('generated_demo' in data) || (data.generated_demo is bool)) &&
+             (!('viewed_demo' in data) || (data.viewed_demo is bool)) &&
+             (!('clicked_whatsapp' in data) || (data.clicked_whatsapp is bool)) &&
+             (!('viewed_pricing' in data) || (data.viewed_pricing is bool));
+    }
+
+    // Secure database endpoints for the leads collection
+    match /leads/{leadId} {
+      allow get: if true; // Allow anyone to fetch a single lead demo
+      
+      allow create: if isValidId(leadId) && 
+                    isValidLead(incoming());
+      
+      allow update: if (isValidId(leadId) && (
+        // Public actions for analytics progression tracking
+        (
+          incoming().diff(existing()).affectedKeys().hasAny(['time_on_page', 'viewed_demo', 'clicked_whatsapp', 'viewed_pricing', 'converted', 'converted_at']) &&
+          incoming().diff(existing()).affectedKeys().hasOnly(['time_on_page', 'viewed_demo', 'clicked_whatsapp', 'viewed_pricing', 'converted', 'converted_at']) &&
+          isValidLead(incoming())
+        ) ||
+        // Fully validated update for Admins
+        isAdmin()
+      ));
+
+      allow list, delete: if isAdmin();
+    }
+  }
+}

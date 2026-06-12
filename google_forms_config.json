@@ -1,0 +1,15 @@
+{
+  "formUrl": "https://forms.gle/XEadSJZPePdNqDGs7",
+  "isEnabled": true,
+  "mapping": {
+    "business_name": "entry.486659330",
+    "category": "entry.2102543700",
+    "owner_name": "entry.904658407",
+    "city": "entry.1527325445",
+    "address": "entry.534183896",
+    "phone": "entry.212954275",
+    "whatsapp": "entry.540526633",
+    "tagline": "entry.622947593",
+    "demo_url": "entry.1469321151"
+  }
+}
